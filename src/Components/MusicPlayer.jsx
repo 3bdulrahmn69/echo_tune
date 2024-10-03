@@ -63,9 +63,11 @@ const MusicPlayer = ({
           className="md:text-lg text-sm text-gray-300 bg-black/20 rounded-md px-2 py-1 mb-2"
           title={currentTrack?.artists[0].name}
         >
-          {currentTrack?.artists[0].name.length > 10
-            ? currentTrack?.artists[0].name.substring(0, 10) + '...'
-            : currentTrack?.artists}
+          {currentTrack?.artists
+            .map((artist) => artist.name)
+            .join(', ')
+            .substring(0, 10)}
+          {currentTrack?.artists[0].name.length > 10 ? '...' : ''}
         </h2>
         <CustomAudio
           src={currentTrack?.preview_url}

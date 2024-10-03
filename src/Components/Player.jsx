@@ -21,14 +21,17 @@ const Player = ({
       {currentTrack && (
         <div className="w-5/6 px-8 py-8 m-24 relative animate-FadeIn">
           <CloseTrack setCurrentTrack={setCurrentTrack} />
-          <a
-            className="absolute md:top-1/2 top-0 right-8 bg-gray-200 p-1 rounded-full"
-            href={currentTrack?.external_urls.spotify}
-            target="_blank"
-            rel="noreferrer"
-          >
-            <BsSpotify className="w-8 h-8 text-green-400" />
-          </a>
+          {currentTrack?.external_urls?.spotify && (
+            <a
+              className="absolute md:top-1/2 top-0 right-8 bg-gray-200 p-1 rounded-full"
+              href={currentTrack.external_urls.spotify}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`Open ${currentTrack.name} on Spotify`}
+            >
+              <BsSpotify className="w-8 h-8 text-green-400" />
+            </a>
+          )}
           <MusicPlayer
             currentTrack={currentTrack}
             isPlaying={isPlaying}
@@ -43,13 +46,30 @@ const Player = ({
 };
 
 Player.propTypes = {
-  currentTrack: PropTypes.object,
-  nextTrack: PropTypes.func,
-  prevTrack: PropTypes.func,
-  isPlaying: PropTypes.bool,
-  setIsPlaying: PropTypes.func,
-  setCurrentTrack: PropTypes.func,
-  tracks: PropTypes.array,
+  currentTrack: PropTypes.shape({
+    id: PropTypes.string,
+    name: PropTypes.string,
+    external_urls: PropTypes.shape({
+      spotify: PropTypes.string,
+    }),
+    album: PropTypes.object,
+    artists: PropTypes.array,
+    preview_url: PropTypes.string,
+  }),
+  nextTrack: PropTypes.func.isRequired,
+  prevTrack: PropTypes.func.isRequired,
+  isPlaying: PropTypes.bool.isRequired,
+  setIsPlaying: PropTypes.func.isRequired,
+  setCurrentTrack: PropTypes.func.isRequired,
+  tracks: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      name: PropTypes.string,
+      album: PropTypes.object,
+      artists: PropTypes.array,
+      preview_url: PropTypes.string,
+    })
+  ).isRequired,
 };
 
 export default Player;

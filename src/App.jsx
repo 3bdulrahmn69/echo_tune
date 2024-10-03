@@ -39,7 +39,7 @@ const App = () => {
   }
 
   return (
-    <dev className="h-screen overflow-hidden">
+    <div className="h-screen overflow-hidden">
       <main className="w-full h-screen flex md:flex-row flex-col">
         <Player
           currentTrack={currentTrack}
@@ -52,7 +52,7 @@ const App = () => {
         />
         <List tracks={tracks} trackCLicked={handleTrackClicked} />
       </main>
-    </dev>
+    </div>
   );
 };
 
