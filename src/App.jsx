@@ -38,6 +38,11 @@ const App = () => {
     }
   }
 
+  function closeTrack() {
+    setCurrentTrack(null);
+    setIsPlaying(false);
+  }
+
   return (
     <div className="h-screen overflow-hidden">
       <main className="w-full h-screen flex md:flex-row flex-col">
@@ -49,6 +54,7 @@ const App = () => {
           setIsPlaying={setIsPlaying}
           setCurrentTrack={setCurrentTrack}
           tracks={tracks}
+          closeTrack={closeTrack}
         />
         <List tracks={tracks} trackCLicked={handleTrackClicked} />
       </main>

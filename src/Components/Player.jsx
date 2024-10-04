@@ -12,6 +12,7 @@ const Player = ({
   setIsPlaying,
   setCurrentTrack,
   tracks,
+  closeTrack
 }) => {
   return (
     <div className="md:w-2/3 w-full md:h-full h-2/3 flex items-center justify-center">
@@ -20,7 +21,7 @@ const Player = ({
       )}
       {currentTrack && (
         <div className="w-5/6 px-8 py-8 m-24 relative animate-FadeIn">
-          <CloseTrack setCurrentTrack={setCurrentTrack} />
+          <CloseTrack closeTrack={closeTrack} />
           {currentTrack?.external_urls?.spotify && (
             <a
               className="absolute md:top-1/2 top-0 right-8 bg-gray-200 p-1 rounded-full"
@@ -70,6 +71,7 @@ Player.propTypes = {
       preview_url: PropTypes.string,
     })
   ).isRequired,
+  closeTrack: PropTypes.func.isRequired,
 };
 
 export default Player;
